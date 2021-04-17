@@ -23,20 +23,21 @@ You may also set the project's virtual environment and install python libraries 
 ### Running the feature files:
 1. Make sure your virtual environment is activated.
 2. Entering the command behave to run all the feature files.
-	a. On [behave] section in behave.ini file you may set specific feature file to run and run the command on your terminal:
+	a. On [behave] section in behave.ini file you may set specific feature file and run the command on your terminal:
 	```
 	behave
 	```
 	b. To generate an allure report run and execute the following command on your terminal
-		- To run your test set in in behave.ini
+	
+	- To run your test set in in behave.ini, execute:
 		```
 		behave -f allure -o allure-results -f pretty 
 		```
-		- To generate allure reports after executing the test
+	- To generate allure reports after executing the test, execute:
 		```
 		allure generate allure-results -o allure-reports
 		```
-		- To view the reports: Reports will be viewable in chrome
+	- To view the reports execute:
 		```
 		allure open allure-reports
 		```
