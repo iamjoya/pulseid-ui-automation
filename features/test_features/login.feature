@@ -12,48 +12,47 @@ Feature: Pulse ID Login
      Connecting to Pulse Dev Cognito Test
      """
 
-#  @login @positive_scenarios
-#  Scenario Outline: Clicking not you should navigates me to the user name input field
-#    Given I am on the "One Login" screen
-#    When I input "<email_address>" on the "Email Address" field
-#    And I click on the "Continue" button
-#    And wait for the "Password" field to display
-#    And I click on the "Not You?" link
-#    Then the "Email Address" field should be displayed
-##    And the "Email Address" field should be empty
-#
-#
-#    Examples:
-#      | email_address  |
-#      | test@gmail.com |
-#
-#  @login @negative_scenarios
-#  Scenario Outline: Validation error should prompt when I login using invalid credentials.
-#    Given I am on the "One Login" screen
-#    When I input "<email_address>" on the "Email Address" field
-#    And I click on the "Continue" button
-#    And wait for the "Password" field to display
-#    And I input "<password>" on the "Password" field
-#    And I click on the "Continue" button
-#    And wait for the "Notification Alert" message to display
-#    Then the following "Notification Alert" message should be displayed
-#    """
-#    Invalid username or password
-#    """
-#    And the following validation header message should be displayed
-#     """
-#     Access Denied
-#     """
-#    And the following validation message should be displayed
-#     """
-#     Please try again or contact your administrator.
-#     """
-#    And clicking on "Try Again" button navigates me to the "Email Address" field
-#
-#
-#    Examples:
-#      | email_address                 | password   |
-#      | non.registered.user@gmail.com | uXSlk$%^sW |
+  @login @positive_scenarios
+  Scenario Outline: Clicking not you should navigates me to the user name input field
+    Given I am on the "One Login" screen
+    When I input "<email_address>" on the "Email Address" field
+    And I click on the "Continue" button
+    And wait for the "Password" field to display
+    And I click on the "Not You?" link
+    Then the "Email Address" field should be displayed
+
+
+    Examples:
+      | email_address  |
+      | test@gmail.com |
+
+  @login @negative_scenarios
+  Scenario Outline: Validation error should prompt when I login using invalid credentials.
+    Given I am on the "One Login" screen
+    When I input "<email_address>" on the "Email Address" field
+    And I click on the "Continue" button
+    And wait for the "Password" field to display
+    And I input "<password>" on the "Password" field
+    And I click on the "Continue" button
+    And wait for the "Notification Alert" message to display
+    Then the following "Notification Alert" message should be displayed
+    """
+    Invalid username or password
+    """
+    And the following validation header message should be displayed
+     """
+     Access Denied
+     """
+    And the following validation message should be displayed
+     """
+     Please try again or contact your administrator.
+     """
+    And clicking on "Try Again" button navigates me to the "Email Address" field
+
+
+    Examples:
+      | email_address                 | password   |
+      | non.registered.user@gmail.com | uXSlk$%^sW |
 
 
   @login @negative_scenarios

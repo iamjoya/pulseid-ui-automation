@@ -1,7 +1,13 @@
+from behave.model import Scenario
 from configparser import ConfigParser, ExtendedInterpolation
 from selenium import webdriver
 from features.utilities import fixture as fx
 from features.utilities import elements as pulse_id
+from allure import attach, attachment_type
+
+from pathlib import Path
+
+current_dir = Path(__file__).parent.absolute()
 
 
 def get_locators(context, key):
@@ -20,6 +26,12 @@ def get_locators(context, key):
 def before_all(context):
     context.directory = ConfigParser(interpolation=ExtendedInterpolation())
     context.directory.read('features/utilities/page_directory.ini')
+
+    Scenario.continue_after_failed_step = True
+
+
+def before_feature(context, feature):
+    context.feature_data = {}
     context.max_wait = 20
     context.driver = webdriver.Chrome('drivers/chromedriver')
     context.driver.maximize_window()
@@ -32,10 +44,16 @@ def before_scenario(context, scenario):
 
 
 def after_step(context, step):
+    screenshot_dir = f'{current_dir}/screenshots'
     if step.status == 'failed':
         feature_name = context.feature.name
         scenario_name = context.scenario.name
-        fx.get_element_key(feature_name, scenario_name)
+        key = fx.get_element_key(feature_name, scenario_name)
+
+        Path(screenshot_dir).mkdir(exist_ok=True)
+        screenshot_dir = f'{screenshot_dir}/{key}.png'
+        context.driver.save_screenshot(screenshot_dir)
+        print(f'Screenshot taken for the failed step: {feature_name} - {scenario_name} - {step.name}')
 
 
 def after_feature(context, feature):
