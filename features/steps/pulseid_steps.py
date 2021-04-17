@@ -40,6 +40,12 @@ def step_impl(context, element_name, element_type):
     key.wait_element_to_be_visible(context, element_key)
 
 
+@given(u'waited for the "{element_name}" {element_type} to be hidden')
+def step_impl(context, element_name, element_type):
+    element_key = fx.get_element_key(element_name, element_type)
+    key.wait_element_to_be_invisible(context, element_key)
+
+
 @when(u'I select the "{value}" {value_type} from the active "{element_name}" {element_type}')
 def step_impl(context, value, value_type, element_name, element_type):
     element_key = fx.get_element_key(element_name, element_type)
@@ -56,9 +62,51 @@ def step_impl(context, element_name, element_type):
     element_key = fx.get_element_key(element_name, element_type)
     key.wait_any_element_to_be_visible(context, element_key)
 
+
 @when(u'wait for background processes to finish after {number:f} seconds')
 def step_impl(context, number):
     key.wait_in_seconds(number)
+
+
+@when(u'wait for the "{element_name}" {element_type} to be hidden')
+def step_impl(context, element_name, element_type):
+    element_key = fx.get_element_key(element_name, element_type)
+    key.wait_element_to_be_invisible(context, element_key)
+
+
+@when(u'I clear out the "{element_name}" {element_type}')
+def step_impl(context, element_name, element_type):
+    element_key = fx.get_element_key(element_name, element_type)
+    if element_type == 'form':
+        key.clear_form(context, element_key)
+    else:
+        key.clear_field(context, element_key)
+
+
+@when(u'I input to send "{value}" on the "{element_name}" {element_type}')
+def step_impl(context, value, element_name, element_type):
+    element_key = fx.get_element_key(element_name, element_type)
+    key.click_and_enter_value(context, element_key, value)
+
+
+@when(u'I select the following {value_type} in "{element_name}" {element_type}')
+def step_impl(context, value_type, element_name, element_type):
+    label_key = fx.get_element_key(element_name, element_type)
+    option_key = fx.get_element_key(element_name, value_type)
+    key.select_from_checkboxes(context, label_key, option_key)
+
+
+@when(u'I upload the file "{file_name}" in the "{element_name}" {element_type}')
+def step_impl(context, file_name, element_name, element_type):
+    element_key = fx.get_element_key(element_name, element_type)
+    key.upload_file(context, element_key, file_name)
+
+
+@when(u'I move to click on the "{element_name}" {element_type}')
+def step_impl(context, element_name, element_type):
+    element_key = fx.get_element_key(element_name, element_type)
+    key.move_to_element_then_click(context, element_key)
+
 
 @then(u'the "{element_name}" {element_type} should be displayed')
 def step_impl(context, element_name, element_type):
@@ -144,3 +192,32 @@ def step_impl(context, element_name, element_type):
     assert_that(actual_values).described_as(f'{element_name} {element_type} values').contains(*expected_values)
 
 
+@then(u'the "{element_name}" {element_type} should be disabled')
+def step_impl(context, element_name, element_type):
+    element_key = fx.get_element_key(element_name, element_type)
+    actual_elements = key.find_elements(context, element_key)
+
+    for element in actual_elements:
+        assert_that(element.is_enabled()).described_as(f'{element_name} {element_type}').is_false()
+
+
+@then(u'the "{element_name}" should be "{expected_value}"')
+def step_impl(context, element_name, expected_value):
+    element_key = fx.get_element_key(element_name)
+    actual_value = key.get_text(context, element_key)
+    expected_value = key.update_param_with_feature_data(context, expected_value)
+
+    assert_that(actual_value).described_as(element_name).is_equal_to(expected_value)
+
+
+@then(u'the {attribute_value} of "{element_name}" {element_type} should be "{expected_visible_value}"')
+def step_impl(context, attribute_value, element_name, element_type, expected_visible_value):
+    element_key = fx.get_element_key(element_name, element_type)
+
+    attribute = attribute_value
+    transformed_value = key.update_param_with_feature_data(context, expected_visible_value)
+    expected_value = transformed_value if expected_visible_value not in ('empty', 'blank') else ''
+
+    actual_value = key.get_attribute_value_from_field(context, element_key, attribute)
+    assert_that(actual_value).described_as(f'{element_name} {element_type} is {expected_visible_value}').is_equal_to(
+        expected_value)
