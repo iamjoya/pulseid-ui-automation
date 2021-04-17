@@ -1,7 +1,7 @@
 # pulseid-ui-automation
 QA Automation assessment for PulseId
 
-###Prerequisites
+### Prerequisites
 
 - [Python v3.8.0](https://www.python.org/downloads/) up to the latest version
 - [Pip, Pip3 and virtualenv](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
@@ -10,16 +10,36 @@ QA Automation assessment for PulseId
 
 ### Setup instructions:
 
-1. Git clone the pulseid-ui-automation / Download the project file
-2. Inside the same folder, create a virtual environment.
-3. Go to the pulseid-ui-automation folder and activate virtual environment using the command source ../<venv_name>/bin/activate
+1. Create a folder named "pulseid-automation". 
+2. Inside pulseid-automation folder, clone this repository.
+3. Inside the same folder, create a virtual environment.
+4. Go to the pulseid-ui-automation folder and activate virtual environment using the command
+`source ../<venv_name>/bin/activate`.
+5. Install python libraries by entering the command `pip install -r requirements.txt`.
+6. Create a folder named "driver" inside the pulseid-ui-automation folder and move downloaded chrome drivers. `Note: Make sure you download the same version on your current chrome browser`
 
 You may also set the project's virtual environment and install python libraries in PyCharm > Preferences... > Project > Project Interpreter.
 
-
 ### Running the feature files:
-- Make sure your virtual environment is activated.
-- entering the command behave to run all the feature files.
-	- To run specific feature files, run behave features/<feature_filename>.feature.
-	- Run the [behave] command on your terminal.
+1. Make sure your virtual environment is activated.
+2. Entering the command behave to run all the feature files.
+	a. On [behave] section in behave.ini file you may set specific feature file to run and run the command on your terminal:
+	```
+	behave
+	```
+	b. To generate an allure report run and execute the following command on your terminal
+		- To run your test set in in behave.ini
+		```
+		behave -f allure -o allure-results -f pretty 
+		```
+		- To generate allure reports after executing the test
+		```
+		allure generate allure-results -o allure-reports
+		```
+		- To view the reports: Reports will be viewable in chrome
+		```
+		allure open allure-reports
+		```
+		
+	
 	
