@@ -54,7 +54,7 @@ Feature: Pulse ID - Offer Ruleset and Offer Creation flow
       | Get 55% Cashback when you spend $1 or more on your 3rd purchase | 2020-08-11 12:00 PM UTC | Create Offer  |
       | Get 5% Cashback                                                 | 2020-08-11 12:11 PM UTC | Create Offer  |
 
-#Note: Then step will fail (Know issue as per Sonny)
+#Note: Then step will fail (Known issue as per Sonny)
   @create_offer @positive_scenarios
   Scenario Outline: No results found should display when i search Invalid offer rule
     Given I am on the "Manage Your Offer Rules" section
@@ -69,7 +69,7 @@ Feature: Pulse ID - Offer Ruleset and Offer Creation flow
       | invalid_offer_rules   |
       | Offer rules not exist |
 
-#Note: Then step will fail (Know issue as per Sonny)
+#Note: Then step will fail (Known issue as per Sonny)
   @create_offer @negative_scenarios
   Scenario Outline: Be able to search existing Active Offer Rules
     Given I am on the "Manage Your Offer Rules" section
