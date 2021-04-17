@@ -23,6 +23,7 @@ You may also set the project's virtual environment and install python libraries 
 ### Running the feature files:
 1. Make sure your virtual environment is activated.
 2. Entering the command behave to run all the feature files.
+
 	a. On [behave] section in behave.ini file you may set specific feature file and run the command on your terminal:
 	```
 	behave
