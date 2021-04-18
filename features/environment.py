@@ -3,7 +3,6 @@ from configparser import ConfigParser, ExtendedInterpolation
 from selenium import webdriver
 from features.utilities import fixture as fx
 from features.utilities import elements as pulse_id
-from allure import attach, attachment_type
 
 from pathlib import Path
 

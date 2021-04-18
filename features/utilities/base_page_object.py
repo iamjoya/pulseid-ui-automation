@@ -7,7 +7,6 @@ from selenium.common.exceptions import NoSuchElementException, StaleElementRefer
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait as wait
 from features.utilities import fixture as fx
-from selenium.webdriver.support.select import Select
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 

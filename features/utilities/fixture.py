@@ -1,5 +1,4 @@
 import re
-import configparser
 
 
 def to_snake_case(value):
