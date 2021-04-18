@@ -1,7 +1,7 @@
 Feature: Pulse ID Login
 
   @login @positive_scenarios
-  Scenario: Login button should be disabled
+  Scenario: Navigated to One login screen when sign in with VOL is click
     Given I went on the "PulseID Login" page
     And waited for the "Sign in with VOL" button to display
     When I click on the "Sign in with VOL" button
